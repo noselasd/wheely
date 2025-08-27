@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Wheel from '$lib/components/Wheel.svelte';
+	import EditWheel from '$lib/components/EditWheel.svelte';
 	import { data, setItems, type Item } from '$lib/WheelData.svelte';
 	setItems([
 		{
@@ -15,7 +16,7 @@
 			label: 'Four'
 		}
 	]);
-	data.name = 'Wheel of Numbers';
+	data.name = 'Spin the Wheel';
 	let text = {
 		get value() {
 			let s = data.items.map((e: Item) => e.label).join('\n');
@@ -23,9 +24,9 @@
 			return s;
 		},
 		set value(val: string) {
-			let e = val.split('\n').filter((s) => s.trim().length > 0);
+			let e = val.split('\n');
 			let items = e.map((e) => {
-				return { label: e.trim() };
+				return { label: e };
 			});
 			setItems(items);
 		}
@@ -42,19 +43,35 @@
 		</div>
 	</div>
 	<div class="right shadowbox">
-		<div class="title">Entries</div>
-		<textarea
-			rows="5"
-			bind:value={text.value}
-			autocomplete="off"
-			spellcheck="false"
-			maxlength="2048"
-		>
-		</textarea>
+		<div class="right">
+			<EditWheel>
+				{#snippet quick()}
+					<div class="desc">Type or paste entries below</div>
+					<textarea
+						rows="10"
+						bind:value={text.value}
+						autocomplete="off"
+						spellcheck="false"
+						maxlength="1024"
+					>
+					</textarea>
+				{/snippet}
+				{#snippet entries()}
+					<h1>placeholder</h1>
+				{/snippet}
+				{#snippet winners()}
+					<h1>placeholder</h1>
+				{/snippet}
+			</EditWheel>
+		</div>
 	</div>
 </div>
 
 <style lang="scss">
+	.desc {
+		margin: 1em;
+		color: var(--app-table-header-text-color);
+	}
 	.container {
 		display: flex;
 		height: 100%;
@@ -64,7 +81,7 @@
 		align-items: center;
 		display: flex;
 		flex-direction: column;
-		flex: 8.5;
+		flex: 8;
 	}
 	.title {
 		margin: auto;
@@ -92,19 +109,21 @@
 		-moz-box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.58);
 	}
 	.right {
-		flex: 1.5; /* 15% width */
+		flex: 2; /* 15% width */
 		display: flex;
-		margin: 1em;
 		flex-direction: column;
+		margin: 1em;
+		height: 98%;
 	}
 
-	$margin: 0.3em;
+	$margin: 0em;
 	textarea {
 		padding: 0.5em;
 		margin: $margin;
 		width: calc(100% - 2 * $margin);
 		height: calc(100% - 2 * $margin);
 		font-size: 16px;
+		box-sizing: border-box;
 		border: 0;
 		background: var(--app-content-background);
 		color: var(--app-text-color);
