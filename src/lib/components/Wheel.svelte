@@ -1,11 +1,10 @@
 <script lang="ts">
 	// @ts-ignore , we don't have type definitions for spin-wheel
 	import { Wheel } from 'spin-wheel';
+	import { type Item } from '$lib/WheelData.svelte';
 	import ex0 from '$lib/images/example-0-image.svg';
 	import ex0_o from '$lib/images/example-2-overlay.svg';
-	export interface Item {
-		label: string;
-	}
+
 	let {
 		items
 	}: {
@@ -42,10 +41,6 @@
 		borderWidth: 0
 	};
 
-	function spinWheel() {
-		console.log('spin', currentWheel);
-		currentWheel.spin(360 * (Math.random() * 5 + 5));
-	}
 	$effect(() => {
 		console.log('Items update');
 		if (currentWheel) {
@@ -68,14 +63,6 @@
 </script>
 
 <div class="container">
-	<div>
-		<div class="gui-wrapper">
-			<p>Click-drag (or touch-flick) to spin the wheel.</p>
-			<div>
-				<button onclick={spinWheel}>Spin</button>
-			</div>
-		</div>
-	</div>
 	<div class="wheel" bind:this={wheelElement}></div>
 </div>
 
@@ -91,28 +78,6 @@
 		overflow: hidden;
 	}
 
-	.gui-wrapper {
-		padding: 10px;
-		display: flex;
-		width: 100%;
-		flex-direction: column;
-		gap: 10px;
-		background-color: blue;
-	}
-
-	.gui-wrapper > div {
-		display: flex;
-		flex-direction: row;
-		gap: 10px;
-		align-items: center;
-	}
-
-	button {
-		padding: 10px 20px;
-		cursor: pointer;
-		margin-right: 10px;
-		max-width: 100px;
-	}
 	.container {
 		height: 100%;
 		display: flex;
