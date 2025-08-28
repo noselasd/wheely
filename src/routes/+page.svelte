@@ -33,59 +33,95 @@
 	};
 </script>
 
-<div class="container">
-	<div class="left">
-		<div class="title">
-			{data.name}
+<div class="wrapper">
+	<div class="top">
+		<div class="title">{data.name}</div>
+	</div>
+
+	<div class="mid">
+		<div class="left shadowbox">
+			<div class="wheelbox">
+				<Wheel items={data.items} />
+			</div>
 		</div>
-		<div class="wheelbox shadowbox">
-			<Wheel items={data.items} />
+
+		<div class="right shadowbox">
+			<div class="panel">
+				<EditWheel>
+					{#snippet quick()}
+						<div class="desc">Type or paste entries below</div>
+						<textarea
+							rows="10"
+							bind:value={text.value}
+							autocomplete="off"
+							spellcheck="false"
+							maxlength="2048"
+							wrap={'off' as any}
+						>
+						</textarea>
+					{/snippet}
+					{#snippet entries()}<h1>placeholder</h1>{/snippet}
+					{#snippet winners()}<h1>placeholder</h1>{/snippet}
+				</EditWheel>
+			</div>
 		</div>
 	</div>
-	<div class="right shadowbox">
-		<div class="right">
-			<EditWheel>
-				{#snippet quick()}
-					<div class="desc">Type or paste entries below</div>
-					<textarea
-						rows="10"
-						bind:value={text.value}
-						autocomplete="off"
-						spellcheck="false"
-						maxlength="1024"
-					>
-					</textarea>
-				{/snippet}
-				{#snippet entries()}
-					<h1>placeholder</h1>
-				{/snippet}
-				{#snippet winners()}
-					<h1>placeholder</h1>
-				{/snippet}
-			</EditWheel>
-		</div>
+
+	<div class="bottom">
+		<div class="desc">BOTTOM</div>
 	</div>
 </div>
 
 <style lang="scss">
-	.desc {
-		margin: 1em;
-		color: var(--app-table-header-text-color);
-	}
-	.container {
+	.wrapper {
 		display: flex;
-		height: 100%;
-		flex-direction: row;
+		flex-direction: column;
+		height: 100vh; // fill viewport
+		min-height: 0; // allow children to shrink
 	}
+
+	.top,
+	.bottom {
+		flex: 0 0 auto; // size to content; never collapse
+		margin: 0 auto; // keep your horizontal centering without vertical auto
+	}
+
+	.mid {
+		display: flex;
+		flex-direction: row;
+		flex: 1 1 auto; // take remaining space
+		min-height: 0; // KEY: allows .mid to shrink so bottom stays visible
+	}
+
 	.left {
 		align-items: center;
 		display: flex;
 		flex-direction: column;
-		flex: 8;
+		flex: 8 1 0; // 80% width vs right’s 20%
+		margin: 1em;
+		min-width: 0;
+		min-height: 0; // allow internal shrink
 	}
+
+	.right {
+		display: flex;
+		flex-direction: column;
+		flex: 2 1 0;
+		margin: 1em;
+		min-width: 0;
+		min-height: 0;
+	}
+
+	.panel {
+		display: flex;
+		flex-direction: column;
+		flex: 1 1 auto;
+		min-height: 0;
+		overflow: auto; // scroll inside panel instead of pushing bottom away
+	}
+
 	.title {
-		margin: auto;
-		flex: 0.5;
+		flex: 0 0 auto;
 		padding: 0.3em;
 		font-size: 3em;
 		text-shadow:
@@ -96,40 +132,44 @@
 			0 0 1.2em #2d6072,
 			0 0 1.5em #2d6072;
 	}
+
 	.wheelbox {
-		flex: 9.5;
+		flex: 1 1 auto; // fill column height without fixed height
 		width: 95%;
-		height: 95%;
-		margin-bottom: 1em;
+		min-height: 0;
 	}
+
 	.shadowbox {
 		background: var(--app-content-background);
 		box-shadow: 1px 1px 10px 5px rgba(183, 179, 179, 0.58);
 		-webkit-box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.58);
 		-moz-box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.58);
 	}
-	.right {
-		flex: 2; /* 15% width */
-		display: flex;
-		flex-direction: column;
+
+	.desc {
 		margin: 1em;
-		height: 98%;
+		color: var(--app-table-header-text-color);
 	}
 
 	$margin: 0em;
+
 	textarea {
 		padding: 0.5em;
 		margin: $margin;
 		width: calc(100% - 2 * $margin);
-		height: calc(100% - 2 * $margin);
 		font-size: 16px;
 		box-sizing: border-box;
 		border: 0;
 		background: var(--app-content-background);
 		color: var(--app-text-color);
 		resize: none;
+
+		/* flex instead of fixed height so it can shrink */
+		flex: 1 1 auto;
+		min-height: 0;
+		height: auto;
+
 		&:focus {
-			//outline: none !important;
 			outline: solid var(--app-input-border-color);
 		}
 	}
