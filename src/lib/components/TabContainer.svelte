@@ -1,23 +1,28 @@
 <script lang="ts">
-	let { quick, entries, winners } = $props();
-	let tabs = [
-		{ name: 'Entries', comp: entries },
-		{ name: 'Quick', comp: quick },
-		{ name: 'Winners', comp: winners }
-	];
+	import type { Snippet } from 'svelte';
 
-	let cur = $state(tabs[1]);
+	// type Props = {
+	// 	// Classic props :
+	// 	activeIndex: number;
+	// } & {
+	// 	// restProps : anything of type Snippet
+	// 	[key: string]: Snippet;
+	// };
+	let { activeIndex = $bindable(0), ...restProps } = $props();
+
+	const tabs = $derived(Object.entries(restProps).map(([k, v]) => ({ name: k, snippet: v })));
+	let active = $derived(tabs[activeIndex]);
 </script>
 
 <div class="tabs">
 	{#each tabs as tab}
-		<button class:selected={cur.name === tab.name} onclick={() => (cur = tab)}>
+		<button class:selected={active.name === tab.name} onclick={() => (active = tab)}>
 			{tab.name}
 		</button>
 	{/each}
 </div>
 <main>
-	{@render cur.comp()}
+	{@render active.snippet()}
 </main>
 
 <style lang="scss">

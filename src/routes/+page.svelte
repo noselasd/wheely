@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Wheel from '$lib/components/Wheel.svelte';
-	import EditWheel from '$lib/components/EditWheel.svelte';
+	import TabContainer from '$lib/components/TabContainer.svelte';
 	import { data, setItems, type Item } from '$lib/WheelData.svelte';
 	setItems([
 		{
@@ -47,8 +47,9 @@
 
 		<div class="right shadowbox">
 			<div class="panel">
-				<EditWheel>
-					{#snippet quick()}
+				<TabContainer activeIndex={1}>
+					{#snippet Entries()}<h1>placeholder</h1>{/snippet}
+					{#snippet Quick()}
 						<div class="desc">Type or paste entries below</div>
 						<textarea
 							rows="10"
@@ -60,9 +61,8 @@
 						>
 						</textarea>
 					{/snippet}
-					{#snippet entries()}<h1>placeholder</h1>{/snippet}
-					{#snippet winners()}<h1>placeholder</h1>{/snippet}
-				</EditWheel>
+					{#snippet Winners()}<h1>placeholder</h1>{/snippet}
+				</TabContainer>
 			</div>
 		</div>
 	</div>
