@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Wheel from '$lib/components/Wheel.svelte';
 	import TabContainer from '$lib/components/TabContainer.svelte';
-	import { data, setItems, type Item } from '$lib/WheelData.svelte';
+	import { data, setItems } from '$lib/WheelData.svelte';
+	import QuickEntries from '$lib/components/QuickEntries.svelte';
 	setItems([
 		{
 			label: 'one'
@@ -17,20 +18,6 @@
 		}
 	]);
 	data.name = 'Spin the Wheel';
-	let text = {
-		get value() {
-			let s = data.items.map((e: Item) => e.label).join('\n');
-			console.log('S is ', s);
-			return s;
-		},
-		set value(val: string) {
-			let e = val.split('\n');
-			let items = e.map((e) => {
-				return { label: e };
-			});
-			setItems(items);
-		}
-	};
 </script>
 
 <div class="wrapper">
@@ -50,16 +37,7 @@
 				<TabContainer activeIndex={1}>
 					{#snippet Entries()}<h1>placeholder</h1>{/snippet}
 					{#snippet Quick()}
-						<div class="desc">Type or paste entries below</div>
-						<textarea
-							rows="10"
-							bind:value={text.value}
-							autocomplete="off"
-							spellcheck="false"
-							maxlength="2048"
-							wrap={'off' as any}
-						>
-						</textarea>
+						<QuickEntries />
 					{/snippet}
 					{#snippet Winners()}<h1>placeholder</h1>{/snippet}
 				</TabContainer>
@@ -100,7 +78,6 @@
 		flex: 8 1 0; // 80% width vs right’s 20%
 		margin: 1em;
 		min-width: 0;
-		min-height: 0; // allow internal shrink
 	}
 
 	.right {
@@ -109,7 +86,6 @@
 		flex: 2 1 0;
 		margin: 1em;
 		min-width: 0;
-		min-height: 0;
 	}
 
 	.panel {
@@ -144,33 +120,5 @@
 		box-shadow: 1px 1px 10px 5px rgba(183, 179, 179, 0.58);
 		-webkit-box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.58);
 		-moz-box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.58);
-	}
-
-	.desc {
-		margin: 1em;
-		color: var(--app-table-header-text-color);
-	}
-
-	$margin: 0em;
-
-	textarea {
-		padding: 0.5em;
-		margin: $margin;
-		width: calc(100% - 2 * $margin);
-		font-size: 16px;
-		box-sizing: border-box;
-		border: 0;
-		background: var(--app-content-background);
-		color: var(--app-text-color);
-		resize: none;
-
-		/* flex instead of fixed height so it can shrink */
-		flex: 1 1 auto;
-		min-height: 0;
-		height: auto;
-
-		&:focus {
-			outline: solid var(--app-input-border-color);
-		}
 	}
 </style>
