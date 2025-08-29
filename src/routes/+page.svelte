@@ -3,6 +3,7 @@
 	import TabContainer from '$lib/components/TabContainer.svelte';
 	import * as WD from '$lib/WheelData.svelte';
 	import QuickEntries from '$lib/components/QuickEntries.svelte';
+	import WinnersComponent from '$lib/components/Winners.svelte';
 	WD.setItems([
 		{
 			label: 'one'
@@ -46,14 +47,16 @@
 					{#snippet Quick()}
 						<QuickEntries />
 					{/snippet}
-					{#snippet Winners()}<h1>placeholder</h1>{/snippet}
+					{#snippet Winners()}
+						<WinnersComponent />
+					{/snippet}
 				</TabContainer>
 			</div>
 		</div>
 	</div>
 
 	<div class="bottom">
-		<div class="desc">Last winner: <b>{WD.data.winners.at(-1)}</b></div>
+		<div class="desc"></div>
 	</div>
 </div>
 
@@ -68,7 +71,7 @@
 	.top,
 	.bottom {
 		flex: 0 0 auto; // size to content; never collapse
-		margin: 0 auto; // keep your horizontal centering without vertical auto
+		margin: 0 0; // keep your horizontal centering without vertical auto
 	}
 
 	.mid {

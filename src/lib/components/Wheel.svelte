@@ -34,7 +34,7 @@
 		itemLabelColors: ['#000'],
 		itemLabelBaselineOffset: -0.06,
 		itemLabelFont: 'Rubik',
-		itemBackgroundColors: ['#fbf8c4', '#e4f1aa', '#c0d26e', '#ff7d7d'],
+		itemBackgroundColors: ['#fbf8c4', '#e4f1aa', '#c0d26e'],
 		rotationSpeedMax: 700,
 		rotationResistance: -90,
 		lineWidth: 0.0,
