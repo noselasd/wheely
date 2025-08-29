@@ -4,11 +4,13 @@
 	import { type Item } from '$lib/WheelData.svelte';
 	import ex0 from '$lib/images/example-0-image.svg';
 	import ex0_o from '$lib/images/example-2-overlay.svg';
-
+	type OnWinCallback = (winningEntry: string) => void;
 	let {
-		items
+		items,
+		onWin
 	}: {
 		items: Item[];
+		onWin?: OnWinCallback;
 	} = $props();
 
 	let wheelElement: HTMLElement;
@@ -24,7 +26,7 @@
 		items: [],
 		name: 'Takeaway',
 		radius: 0.87,
-		pointerAngle: 90,
+		pointerAngle: 0,
 		itemLabelRadius: 0.92,
 		itemLabelRadiusMax: 0.37,
 		itemLabelRotation: 0,
@@ -48,9 +50,11 @@
 			currentWheel.items = items;
 		}
 	});
+
 	$effect(() => {
 		const wheel = new Wheel(wheelElement, wheelProps);
 		console.log('Wheel creation', wheelElement);
+		wheel.onRest = onRest;
 		wheel.onCurrentIndexChange = (ev: Event) => {
 			console.log('onCurrentIndexChange', ev);
 		};
@@ -60,6 +64,13 @@
 			wheel.remove();
 		};
 	});
+
+	function onRest(data: any) {
+		const winningItem: string = currentWheel?.items[data.currentIndex].label;
+		if (winningItem) {
+			onWin?.(winningItem);
+		}
+	}
 </script>
 
 <div class="container">

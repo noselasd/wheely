@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Wheel from '$lib/components/Wheel.svelte';
 	import TabContainer from '$lib/components/TabContainer.svelte';
-	import { data, setItems } from '$lib/WheelData.svelte';
+	import * as WD from '$lib/WheelData.svelte';
 	import QuickEntries from '$lib/components/QuickEntries.svelte';
-	setItems([
+	WD.setItems([
 		{
 			label: 'one'
 		},
@@ -17,18 +17,25 @@
 			label: 'Four'
 		}
 	]);
-	data.name = 'Spin the Wheel';
+	WD.data.name = 'Spin the Wheel';
+	function onWin(winningItem: string) {
+		WD.addWinner(winningItem);
+	}
+	$effect(() => {
+		const winners = WD.data.winners;
+		console.log('Winners', ...winners);
+	});
 </script>
 
 <div class="wrapper">
 	<div class="top">
-		<div class="title">{data.name}</div>
+		<div class="title">{WD.data.name}</div>
 	</div>
 
 	<div class="mid">
 		<div class="left shadowbox">
 			<div class="wheelbox">
-				<Wheel items={data.items} />
+				<Wheel items={WD.data.items} {onWin} />
 			</div>
 		</div>
 
@@ -46,7 +53,7 @@
 	</div>
 
 	<div class="bottom">
-		<div class="desc">BOTTOM</div>
+		<div class="desc">Last winner: <b>{WD.data.winners.at(-1)}</b></div>
 	</div>
 </div>
 

@@ -46,6 +46,9 @@
 		border-color: var(--app-widget-button-color-darker) var(--app-body-background)
 			var(--app-content-background);
 	}
+	button:hover {
+		background-color: var(--app-widget-button-color-darker);
+	}
 	main {
 		border: 1px solid var(--app-body-background);
 		height: 100%;
