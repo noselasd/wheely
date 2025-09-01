@@ -4,6 +4,10 @@
 	import * as WD from '$lib/WheelData.svelte';
 	import QuickEntries from '$lib/components/QuickEntries.svelte';
 	import WinnersComponent from '$lib/components/Winners.svelte';
+	import WinnerDialog from '$lib/components/WinnerDialog.svelte';
+
+	let showWinnerDlg = $state(false);
+
 	WD.setItems([
 		{
 			label: 'one'
@@ -21,6 +25,7 @@
 	WD.data.name = 'Spin the Wheel';
 	function onWin(winningItem: string) {
 		WD.addWinner(winningItem);
+		showWinnerDlg = true;
 	}
 	$effect(() => {
 		const winners = WD.data.winners;
@@ -28,6 +33,7 @@
 	});
 </script>
 
+<WinnerDialog bind:showModal={showWinnerDlg}></WinnerDialog>
 <div class="wrapper">
 	<div class="top">
 		<div class="title">{WD.data.name}</div>
@@ -127,8 +133,8 @@
 
 	.shadowbox {
 		background: var(--app-content-background);
-		box-shadow: 1px 1px 10px 5px rgba(183, 179, 179, 0.58);
-		-webkit-box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.58);
-		-moz-box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.58);
+		box-shadow: 0px 0px 10px 5px rgba(183, 179, 179, 0.58);
+		-webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.58);
+		-moz-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.58);
 	}
 </style>
