@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { data } from '$lib/WheelData.svelte';
-	let { showModal = $bindable() } = $props();
+	let { showModal = $bindable(), winner = $bindable() } = $props();
 	let dialog: HTMLDialogElement; // HTMLDialogElement
 	$effect(() => {
 		if (showModal) dialog.showModal();
@@ -10,7 +9,7 @@
 <dialog class="shadowbox" bind:this={dialog} onclose={() => (showModal = false)}>
 	<div class="wrapper">
 		<main>
-			<center><h1>{data.winners.at(-1)}</h1></center>
+			<center><h1>{winner}</h1></center>
 		</main>
 		<center><h2>selected</h2> </center>
 
@@ -41,10 +40,7 @@
 		color: var(--app-content-text-color);
 		margin: 0.7em;
 	}
-	header {
-		border-bottom: solid;
-		padding-bottom: 1em;
-	}
+
 	.shadowbox {
 		width: 33%;
 		background: var(--app-content-background);

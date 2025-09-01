@@ -7,7 +7,7 @@
 	import WinnerDialog from '$lib/components/WinnerDialog.svelte';
 
 	let showWinnerDlg = $state(false);
-
+	let lastWinner = $state('');
 	WD.setItems([
 		{
 			label: 'one'
@@ -25,6 +25,7 @@
 	WD.data.name = 'Spin the Wheel';
 	function onWin(winningItem: string) {
 		WD.addWinner(winningItem);
+		lastWinner = winningItem;
 		showWinnerDlg = true;
 	}
 	$effect(() => {
@@ -33,7 +34,7 @@
 	});
 </script>
 
-<WinnerDialog bind:showModal={showWinnerDlg}></WinnerDialog>
+<WinnerDialog bind:showModal={showWinnerDlg} bind:winner={lastWinner}></WinnerDialog>
 <div class="wrapper">
 	<div class="top">
 		<div class="title">{WD.data.name}</div>
