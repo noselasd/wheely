@@ -14,7 +14,7 @@
 		<center><h2>selected</h2> </center>
 
 		<div class="buttons">
-			<button class="cool-button button" autofocus onclick={() => dialog.close()}>Close</button>
+			<button class="cool-button button" onclick={() => dialog.close()}>Close</button>
 		</div>
 	</div>
 </dialog>
@@ -34,6 +34,9 @@
 		display: flex;
 	}
 	.button {
+		color: var(--app-content-text-color);
+
+		background-color: var(--app-widget-button-color);
 		margin-left: auto;
 	}
 	.wrapper {

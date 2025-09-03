@@ -35,7 +35,7 @@
 		itemLabelBaselineOffset: -0.06,
 		itemLabelFont: 'Rubik',
 		itemBackgroundColors: ['#fbf8c4', '#e4f1aa', '#c0d26e'],
-		rotationSpeedMax: 500,
+		rotationSpeedMax: 400,
 		rotationResistance: -40,
 		lineWidth: 0.0,
 		overlayImage: getImage(ex0_o),
