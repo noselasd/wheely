@@ -15,12 +15,8 @@
 
 	let wheelElement: HTMLElement;
 	let currentWheel: Wheel = $state();
+	let background: HTMLImageElement;
 	const maxSpeed = 440;
-	function getImage(name: string): HTMLImageElement {
-		let img = new Image();
-		img.src = name;
-		return img;
-	}
 
 	let wheelProps = {
 		items: [],
@@ -38,8 +34,6 @@
 		rotationSpeedMax: maxSpeed,
 		rotationResistance: -40,
 		lineWidth: 0.0,
-		overlayImage: getImage(ex0_o),
-		//	image: ex0,
 		borderWidth: 0
 	};
 
@@ -52,6 +46,8 @@
 	});
 
 	$effect(() => {
+		//@ts-ignore
+		wheelProps.overlayImage = background;
 		const wheel = new Wheel(wheelElement, wheelProps);
 		console.log('Wheel creation', wheelElement);
 		wheel.onRest = onRest;
@@ -81,6 +77,7 @@
 </script>
 
 <div class="container">
+	<img hidden alt="bg" src={ex0_o} bind:this={background} />
 	<div class="wheel" bind:this={wheelElement}>
 		<button class="spin" onclick={spin}>SPIN</button>
 	</div>
