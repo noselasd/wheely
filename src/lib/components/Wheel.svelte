@@ -15,7 +15,7 @@
 
 	let wheelElement: HTMLElement;
 	let currentWheel: Wheel = $state();
-
+	const maxSpeed = 440;
 	function getImage(name: string): HTMLImageElement {
 		let img = new Image();
 		img.src = name;
@@ -35,7 +35,7 @@
 		itemLabelBaselineOffset: -0.06,
 		itemLabelFont: 'Rubik',
 		itemBackgroundColors: ['#fbf8c4', '#e4f1aa', '#c0d26e'],
-		rotationSpeedMax: 400,
+		rotationSpeedMax: maxSpeed,
 		rotationResistance: -40,
 		lineWidth: 0.0,
 		overlayImage: getImage(ex0_o),
@@ -71,13 +71,22 @@
 			onWin?.(winningItem);
 		}
 	}
+	function spin() {
+		if (!currentWheel) {
+			return;
+		}
+		const speed = Math.random() * (maxSpeed - 340) + 340;
+		currentWheel.spin(speed);
+	}
 </script>
 
 <div class="container">
-	<div class="wheel" bind:this={wheelElement}></div>
+	<div class="wheel" bind:this={wheelElement}>
+		<button role="button" class="spin" onclick={spin}>SPIN</button>
+	</div>
 </div>
 
-<style>
+<style lang="scss">
 	* {
 		font-family: 'Lucida Grande', sans-serif;
 		font-size: 15px;
@@ -87,11 +96,31 @@
 		height: 100%;
 		width: 100%;
 		overflow: hidden;
+		position: relative; /* Still needed for positioning context */
 	}
 
 	.container {
 		height: 100%;
 		display: flex;
 		flex-direction: column;
+	}
+	.spin {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: min(12vw, 12vh); /* Circle scales with both width and height */
+		aspect-ratio: 1 / 1; /* Keeps it symmetrical */
+		border-radius: 50%; /* Turns the square into a circle */
+		background-color: rgba(128, 128, 128, 0);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: black;
+		font-size: 1.5rem;
+		cursor: pointer; /* Detects clicks */
+		transform: translate(-50%, -50%); /* Adjusts for the element's own size */
+	}
+	.spin:hover {
+		background-color: rgba(128, 128, 128, 0.5);
 	}
 </style>
