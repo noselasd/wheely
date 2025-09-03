@@ -82,7 +82,7 @@
 
 <div class="container">
 	<div class="wheel" bind:this={wheelElement}>
-		<button role="button" class="spin" onclick={spin}>SPIN</button>
+		<button class="spin" onclick={spin}>SPIN</button>
 	</div>
 </div>
 
@@ -111,7 +111,7 @@
 		width: min(12vw, 12vh); /* Circle scales with both width and height */
 		aspect-ratio: 1 / 1; /* Keeps it symmetrical */
 		border-radius: 50%; /* Turns the square into a circle */
-		background-color: rgba(128, 128, 128, 0);
+		background-color: rgba(0, 0, 0, 0);
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -121,6 +121,12 @@
 		transform: translate(-50%, -50%); /* Adjusts for the element's own size */
 	}
 	.spin:hover {
-		background-color: rgba(128, 128, 128, 0.5);
+		background-color: rgba(219, 14, 14, 0.2);
+		transition: all 0.1s ease; /* Smooth transition for the effect */
+	}
+	.spin:active {
+		background-color: rgba(219, 14, 14, 0.5);
+		box-shadow: 0 2px 0 #3e8e41; /* Smaller shadow */
+		transition: all 0.2s ease; /* Smooth transition for the effect */
 	}
 </style>
