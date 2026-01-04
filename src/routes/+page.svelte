@@ -5,8 +5,9 @@
     import QuickEntries from '$lib/components/QuickEntries.svelte';
     import WinnersComponent from '$lib/components/Winners.svelte';
     import WinnerDialog from '$lib/components/WinnerDialog.svelte';
-
+    import TitleDialog from '$lib/components/TitleDialog.svelte';
     let showWinnerDlg = $state(false);
+    let showEditTitleDlg = $state(false);
     let lastWinner = $state('');
     WD.setItems([
         {
@@ -35,9 +36,15 @@
 </script>
 
 <WinnerDialog bind:showModal={showWinnerDlg} bind:winner={lastWinner}></WinnerDialog>
+<TitleDialog bind:showModal={showEditTitleDlg} bind:title={WD.data.name}></TitleDialog>
+
 <div class="wrapper">
     <div class="top">
         <div class="title">{WD.data.name}</div>
+        <button
+            class="cool-button button"
+            title="Edit title"
+            onclick={() => (showEditTitleDlg = true)}>🖉</button>
     </div>
 
     <div class="mid">
@@ -50,8 +57,7 @@
         <div class="right shadowbox">
             <div class="panel">
                 <TabContainer activeIndex={1}>
-                    {#snippet Entries()}<h1>placeholder</h1>{/snippet}
-                    {#snippet Quick()}
+                    {#snippet Entries()}
                         <QuickEntries />
                     {/snippet}
                     {#snippet Winners()}
@@ -77,7 +83,9 @@
 
     .top,
     .bottom {
+        display: flex;
         flex: 0 0 auto; // size to content; never collapse
+        flex-direction: row;
         margin: 0 0; // keep your horizontal centering without vertical auto
     }
 
@@ -131,7 +139,11 @@
         width: 95%;
         min-height: 0;
     }
-
+    .button {
+        color: var(--app-content-text-color);
+        background-color: var(--app-widget-button-color);
+        margin: auto 0;
+    }
     .shadowbox {
         background: var(--app-content-background);
         box-shadow: 0px 0px 10px 5px rgba(183, 179, 179, 0.58);

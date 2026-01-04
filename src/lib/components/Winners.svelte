@@ -17,12 +17,13 @@
 <div class="tools">
     <button
         title="Clear winning entries"
-        class=""
+        class="cool-button button"
         onclick={onClear}
         disabled={data.winners.length == 0}>Clear</button>
 </div>
 
 <style lang="scss">
+    $margin: 0em;
     .desc {
         margin: 1em;
         color: var(--app-table-header-text-color);
@@ -30,8 +31,11 @@
     .tools {
         margin: 0.3em;
     }
-
-    $margin: 0em;
+    .button {
+        color: var(--app-content-text-color);
+        background-color: var(--app-widget-button-color);
+        margin-left: auto;
+    }
 
     textarea {
         padding: 0.5em;
