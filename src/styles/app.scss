@@ -1,90 +1,90 @@
 @use 'reset';
 :root {
-	--app-body-background: #191c1c;
-	--app-navigation-background: #1f2f2e;
-	--app-navigation-background-darken: #15201f;
-	--app-text-color: #fff;
-	--app-disabled-text-color: #696969;
-	--app-scrollbar-color: #696969;
-	--app-icon-label-text-color: #a7a7a7;
-	--app-icon-color: #d2d2d2;
-	--app-p-text-color: #d3d3d3;
-	--app-title-text-color: #d8d8d8;
-	--app-title-link-color: #a7a7a7;
-	--app-navigation-darker-text-color: #e6e6e6;
-	--app-content-background: #242828;
-	--app-content-darker-background: #1c1f1f;
-	--app-content-text-color: #d8d8d8;
-	--app-highlight-text-color: #9ed7aa;
-	--app-content-border-color: #707070ac;
-	--app-solid-button-color: #6da478;
-	--app-solid-button-color-darker: #5d9568;
-	--app-widget-button-color: #3c4343;
-	--app-widget-button-color-darker: #434b4b;
-	--app-widget-title-border: #1c1f1f;
-	--app-widget-border: #323737;
-	--app-content-hover-color: #393d3d;
-	--app-modal-transparent-color: rgba(25, 28, 28, 0.9);
-	--app-color-darker-green: #3c7769;
-	--app-color-darker-green-2: #2f5c51;
-	--app-color-blue: #2d6072;
-	--app-color-darker-blue: #214855;
-	--app-color-purple: #4e4a7e;
-	--app-color-darker-purple: #3e3b65;
-	--app-color-live-red: #b14155;
-	--app-color-live-grey: #3f5656;
-	--app-table-color: #2d3232;
-	--app-table-split-color: #242828;
-	--app-table-expandable-row-color: #242828;
-	--app-table-expandable-split-color: #2d3232;
-	--app-table-header-text-color: #9a9a9a;
-	--app-table-group-text-color: #d2d2d2;
-	--app-modal-bg: #292c2c;
-	--app-modal-border: #363a3a;
-	--app-input-border-color: #3b4040;
-	--app-filter-pill-color: #334544;
-	--app-filter-pill-negative-color: #3b4040;
+    --app-body-background: #191c1c;
+    --app-navigation-background: #1f2f2e;
+    --app-navigation-background-darken: #15201f;
+    --app-text-color: #fff;
+    --app-disabled-text-color: #696969;
+    --app-scrollbar-color: #696969;
+    --app-icon-label-text-color: #a7a7a7;
+    --app-icon-color: #d2d2d2;
+    --app-p-text-color: #d3d3d3;
+    --app-title-text-color: #d8d8d8;
+    --app-title-link-color: #a7a7a7;
+    --app-navigation-darker-text-color: #e6e6e6;
+    --app-content-background: #242828;
+    --app-content-darker-background: #1c1f1f;
+    --app-content-text-color: #d8d8d8;
+    --app-highlight-text-color: #9ed7aa;
+    --app-content-border-color: #707070ac;
+    --app-solid-button-color: #6da478;
+    --app-solid-button-color-darker: #5d9568;
+    --app-widget-button-color: #3c4343;
+    --app-widget-button-color-darker: #434b4b;
+    --app-widget-title-border: #1c1f1f;
+    --app-widget-border: #323737;
+    --app-content-hover-color: #393d3d;
+    --app-modal-transparent-color: rgba(25, 28, 28, 0.9);
+    --app-color-darker-green: #3c7769;
+    --app-color-darker-green-2: #2f5c51;
+    --app-color-blue: #2d6072;
+    --app-color-darker-blue: #214855;
+    --app-color-purple: #4e4a7e;
+    --app-color-darker-purple: #3e3b65;
+    --app-color-live-red: #b14155;
+    --app-color-live-grey: #3f5656;
+    --app-table-color: #2d3232;
+    --app-table-split-color: #242828;
+    --app-table-expandable-row-color: #242828;
+    --app-table-expandable-split-color: #2d3232;
+    --app-table-header-text-color: #9a9a9a;
+    --app-table-group-text-color: #d2d2d2;
+    --app-modal-bg: #292c2c;
+    --app-modal-border: #363a3a;
+    --app-input-border-color: #3b4040;
+    --app-filter-pill-color: #334544;
+    --app-filter-pill-negative-color: #3b4040;
 }
 
 body {
-	background-color: var(--app-body-background);
-	color: var(--app-content-text-color);
+    background-color: var(--app-body-background);
+    color: var(--app-content-text-color);
 }
 a,
 a:hover,
 a:visited,
 a:active {
-	color: inherit;
-	text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 .cool-button {
-	padding: 0.5rem 1rem;
-	font-size: 1rem;
-	font-weight: bold;
-	text-transform: uppercase;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	// transition: all 0.06s ease;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    // transition: all 0.06s ease;
 }
 
 .cool-button:hover,
 .cool-button:focus {
-	box-shadow: inset 2px 2px 2px 2px rgba(255, 255, 255, 0.15);
+    box-shadow: inset 2px 2px 2px 2px rgba(255, 255, 255, 0.15);
 }
 
 .cool-button:active {
-	transform: translateY(0);
-	box-shadow: none;
+    transform: translateY(0);
+    box-shadow: none;
 }
 .cool-button:disabled,
 .cool-button[disabled] {
-	opacity: 0.5;
-	pointer-events: none;
+    opacity: 0.5;
+    pointer-events: none;
 }
 .button-container {
-	display: flex;
-	gap: 1rem;
-	margin: 1rem 0;
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
 }
