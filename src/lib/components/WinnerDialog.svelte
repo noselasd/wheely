@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { scale } from 'svelte/transition';
     let { showModal = $bindable(), winner = $bindable() } = $props();
     let dialog: HTMLDialogElement; // HTMLDialogElement
     $effect(() => {
@@ -6,18 +7,24 @@
     });
 </script>
 
-<dialog class="shadowbox" bind:this={dialog} onclose={() => (showModal = false)}>
-    <div class="wrapper">
-        <main>
-            <center><h1>{winner}</h1></center>
-        </main>
-        <center><h2>selected</h2> </center>
+{#if showModal}
+    <dialog
+        class="shadowbox"
+        bind:this={dialog}
+        onclose={() => (showModal = false)}
+        transition:scale={{ duration: 350, start: 0.1, opacity: 0.5 }}>
+        <div class="wrapper">
+            <main>
+                <center><h1>{winner}</h1></center>
+            </main>
+            <center><h2>🎊 Won ! 🎊</h2> </center>
 
-        <div class="buttons">
-            <button class="cool-button button" onclick={() => dialog.close()}>Close</button>
+            <div class="buttons">
+                <button class="cool-button button" onclick={() => dialog.close()}>Close</button>
+            </div>
         </div>
-    </div>
-</dialog>
+    </dialog>
+{/if}
 
 <style lang="scss">
     h1 {
