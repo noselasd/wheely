@@ -11,13 +11,13 @@
     let lastWinner = $state('');
     WD.setItems([
         {
-            label: 'one',
+            label: 'One',
         },
         {
-            label: 'two',
+            label: 'Two',
         },
         {
-            label: 'three',
+            label: 'Three',
         },
         {
             label: 'Four',
