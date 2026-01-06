@@ -18,6 +18,7 @@
     let background: HTMLImageElement;
     let imagLoaded = $state(false);
     const maxSpeed = 440;
+    const resistance = -40;
 
     let wheelProps = {
         items: [],
@@ -33,7 +34,7 @@
         itemLabelFont: 'Rubik',
         itemBackgroundColors: ['#fbf8c4', '#e4f1aa', '#c0d26e'],
         rotationSpeedMax: maxSpeed,
-        rotationResistance: -40,
+        rotationResistance: resistance,
         lineWidth: 0.0,
         borderWidth: 0,
     };
@@ -88,6 +89,8 @@
             return;
         }
         const speed = Math.random() * (maxSpeed - 340) + 340;
+        const factor = 1 + (Math.random() * 0.4 - 0.2); // +/- 20%
+        currentWheel.rotationResistance = resistance * factor;
         currentWheel.spin(speed);
     }
 </script>
