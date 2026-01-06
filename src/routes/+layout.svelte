@@ -1,4 +1,5 @@
 <script lang="ts">
+    export const prerender = true;
     import '../styles/app.scss';
 
     let { children } = $props();

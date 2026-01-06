@@ -8,10 +8,9 @@ RUN npm run build
 
 
 # Production image
-FROM node:lts-alpine AS packages
-ENV PORT=8080
+FROM busybox:latest
+USER nobody:nobody
 WORKDIR /app
-COPY --from=builder /build/node_modules node_modules
 COPY --from=builder /build/build .
 EXPOSE 8080
-CMD ["node", "./index.js"]
+CMD ["busybox", "httpd", "-f", "-v", "-p", "8080"]
