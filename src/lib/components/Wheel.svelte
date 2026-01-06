@@ -16,6 +16,7 @@
     let wheelElement: HTMLElement;
     let currentWheel: Wheel = $state();
     let background: HTMLImageElement;
+    let imagLoaded = $state(false);
     const maxSpeed = 440;
 
     let wheelProps = {
@@ -37,15 +38,7 @@
         borderWidth: 0,
     };
 
-    $effect(() => {
-        console.log('Items update');
-        if (currentWheel) {
-            console.log('Items update set');
-            currentWheel.items = items;
-        }
-    });
-
-    $effect(() => {
+    function initWheel(): Wheel {
         //@ts-ignore
         wheelProps.overlayImage = background;
         const wheel = new Wheel(wheelElement, wheelProps);
@@ -54,11 +47,34 @@
         wheel.onCurrentIndexChange = (ev: Event) => {
             console.log('onCurrentIndexChange', ev);
         };
-        currentWheel = wheel;
-        return () => {
-            console.log('Wheel removal');
-            wheel.remove();
-        };
+        return wheel;
+    }
+    $effect(() => {
+        if (background && background.complete) {
+            imagLoaded = true;
+        } else if (background) {
+            background.onload = () => {
+                imagLoaded = true;
+            };
+        }
+    });
+
+    $effect(() => {
+        if (currentWheel) {
+            console.log('Items update set');
+            currentWheel.items = items;
+        }
+    });
+
+    $effect(() => {
+        if (imagLoaded) {
+            let wheel = initWheel();
+            currentWheel = wheel;
+            return () => {
+                console.log('Wheel removal');
+                wheel.remove();
+            };
+        }
     });
 
     function onRest(data: any) {
