@@ -9,11 +9,7 @@
     import type { Item } from '$lib/WheelData.svelte';
     let showWinnerDlg = $state(false);
     let showEditTitleDlg = $state(false);
-<<<<<<< HEAD
-    let lastWinner = $state('');
-=======
     let lastWinner: Item = $state({ label: '', value: { id: -1, enabled: true } });
->>>>>>> 1275a55 (Allow winners to be removed)
     let clearWinners = $state(false);
     WD.setItems([
         {
@@ -37,11 +33,7 @@
     function onWin(winningItem: Item) {
         WD.addWinner(winningItem.label);
         console.log('Winning item', winningItem);
-<<<<<<< HEAD
-        lastWinner = winningItem.label;
-=======
         lastWinner = winningItem;
->>>>>>> 1275a55 (Allow winners to be removed)
         showWinnerDlg = true;
 
         if (clearWinners) {
