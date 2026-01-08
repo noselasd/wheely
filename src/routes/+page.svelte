@@ -96,7 +96,7 @@
     .wrapper {
         display: flex;
         flex-direction: column;
-        height: 100vh; // fill viewport
+        height: 100svh; // fill viewport
         min-height: 0; // allow children to shrink
     }
 
