@@ -9,7 +9,11 @@
     import type { Item } from '$lib/WheelData.svelte';
     let showWinnerDlg = $state(false);
     let showEditTitleDlg = $state(false);
+<<<<<<< HEAD
     let lastWinner = $state('');
+=======
+    let lastWinner: Item = $state({ label: '', value: { id: -1, enabled: true } });
+>>>>>>> 1275a55 (Allow winners to be removed)
     let clearWinners = $state(false);
     WD.setItems([
         {
@@ -33,12 +37,22 @@
     function onWin(winningItem: Item) {
         WD.addWinner(winningItem.label);
         console.log('Winning item', winningItem);
+<<<<<<< HEAD
         lastWinner = winningItem.label;
+=======
+        lastWinner = winningItem;
+>>>>>>> 1275a55 (Allow winners to be removed)
         showWinnerDlg = true;
 
         if (clearWinners) {
             winningItem.value.enabled = false;
             WD.disableItemById(winningItem.value.id);
+        }
+    }
+    function onCloseWinnerDialog() {
+        if (clearWinners) {
+            lastWinner.value.enabled = false;
+            WD.disableItemById(lastWinner.value.id);
         }
     }
     $effect(() => {
@@ -47,7 +61,8 @@
     });
 </script>
 
-<WinnerDialog bind:showModal={showWinnerDlg} bind:winner={lastWinner}></WinnerDialog>
+<WinnerDialog bind:showModal={showWinnerDlg} bind:winner={lastWinner} onClose={onCloseWinnerDialog}
+></WinnerDialog>
 <TitleDialog bind:showModal={showEditTitleDlg} bind:title={WD.data.name}></TitleDialog>
 
 <div class="wrapper">

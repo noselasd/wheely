@@ -11,7 +11,7 @@
         set value(val: string) {
             let e = val.split('\n');
             let items: Item[] = e.map((e, idx) => {
-                return { label: e, value: { id: idx, enabled: true } };
+                return { label: e, value: { id: idx + 1, enabled: true } };
             });
             setItems(items);
         },

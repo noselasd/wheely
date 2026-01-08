@@ -1,21 +1,36 @@
 <script lang="ts">
+    import type { Item } from '$lib/WheelData.svelte';
     import { scale } from 'svelte/transition';
-    let { showModal = $bindable(), winner = $bindable() } = $props();
+    interface Props {
+        showModal: boolean;
+        winner: Item;
+        onClose?: () => void;
+    }
+    let { showModal = $bindable(), winner = $bindable(), onClose = $bindable() }: Props = $props();
     let dialog: HTMLDialogElement; // HTMLDialogElement
     $effect(() => {
-        if (showModal) dialog.showModal();
+        if (showModal) {
+            dialog.showModal();
+        }
     });
+
+    function closeDialog() {
+        showModal = false;
+        if (onClose) {
+            onClose();
+        }
+    }
 </script>
 
 {#if showModal}
     <dialog
         class="shadowbox"
         bind:this={dialog}
-        onclose={() => (showModal = false)}
+        onclose={() => closeDialog()}
         transition:scale={{ duration: 350, start: 0.1, opacity: 0.5 }}>
         <div class="wrapper">
             <main>
-                <center><h1>{winner}</h1></center>
+                <center><h1>{winner.label}</h1></center>
             </main>
             <center><h2>🎊 Won ! 🎊</h2> </center>
 
