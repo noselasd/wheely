@@ -1,6 +1,7 @@
 <script lang="ts">
     import { data, setItems, type Item } from '$lib/WheelData.svelte';
-
+    import Checkbox from '$lib/components/Checkbox.svelte';
+    let { clearWinners = $bindable(false) } = $props();
     let text = {
         get value() {
             let s = data.items.map((e: Item) => e.label).join('\n');
@@ -9,8 +10,8 @@
         },
         set value(val: string) {
             let e = val.split('\n');
-            let items = e.map((e) => {
-                return { label: e };
+            let items: Item[] = e.map((e, idx) => {
+                return { label: e, value: { id: idx, enabled: true } };
             });
             setItems(items);
         },
@@ -26,6 +27,10 @@
     maxlength="2048"
     wrap={'off' as any}>
 </textarea>
+<div class="tools">
+    <Checkbox title="Remove winners from wheel (Can't win twice)" bind:checked={clearWinners} />
+    Remove winners
+</div>
 
 <style lang="scss">
     .desc {
@@ -54,5 +59,11 @@
         &:focus {
             outline: solid var(--app-input-border-color);
         }
+    }
+    .tools {
+        margin: 0.3em;
+        display: flex;
+        gap: 0.3em;
+        flex-direction: row;
     }
 </style>

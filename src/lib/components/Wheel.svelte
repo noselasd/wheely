@@ -4,7 +4,7 @@
     import { type Item } from '$lib/WheelData.svelte';
     import ex0 from '$lib/images/example-0-image.svg';
     import ex0_o from '$lib/images/example-2-overlay.svg';
-    type OnWinCallback = (winningEntry: string) => void;
+    type OnWinCallback = (winningEntry: Item) => void;
     let {
         items,
         onWin,
@@ -16,7 +16,7 @@
     let wheelElement: HTMLElement;
     let currentWheel: Wheel = $state();
     let background: HTMLImageElement;
-    let imagLoaded = $state(false);
+    let imageLoaded = $state(false);
     const maxSpeed = 440;
     const resistance = -40;
 
@@ -52,10 +52,10 @@
     }
     $effect(() => {
         if (background && background.complete) {
-            imagLoaded = true;
+            imageLoaded = true;
         } else if (background) {
             background.onload = () => {
-                imagLoaded = true;
+                imageLoaded = true;
             };
         }
     });
@@ -63,12 +63,13 @@
     $effect(() => {
         if (currentWheel) {
             console.log('Items update set');
-            currentWheel.items = items;
+            const enabledItems = items.filter((item) => item.value.enabled);
+            currentWheel.items = enabledItems;
         }
     });
 
     $effect(() => {
-        if (imagLoaded) {
+        if (imageLoaded) {
             let wheel = initWheel();
             currentWheel = wheel;
             return () => {
@@ -79,7 +80,7 @@
     });
 
     function onRest(data: any) {
-        const winningItem: string = currentWheel?.items[data.currentIndex].label;
+        const winningItem: Item = currentWheel?.items[data.currentIndex];
         if (winningItem) {
             onWin?.(winningItem);
         }
