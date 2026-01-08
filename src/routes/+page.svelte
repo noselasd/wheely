@@ -35,11 +35,6 @@
         console.log('Winning item', winningItem);
         lastWinner = winningItem;
         showWinnerDlg = true;
-
-        if (clearWinners) {
-            winningItem.value.enabled = false;
-            WD.disableItemById(winningItem.value.id);
-        }
     }
     function onCloseWinnerDialog() {
         if (clearWinners) {
