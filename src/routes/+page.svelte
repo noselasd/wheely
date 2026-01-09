@@ -7,6 +7,8 @@
     import WinnerDialog from '$lib/components/WinnerDialog.svelte';
     import TitleDialog from '$lib/components/TitleDialog.svelte';
     import type { Item } from '$lib/WheelData.svelte';
+    import { version } from '$app/environment';
+
     let showWinnerDlg = $state(false);
     let showEditTitleDlg = $state(false);
     let lastWinner: Item = $state({ label: '', value: { id: -1, enabled: true } });
@@ -59,6 +61,7 @@
             class="cool-button button"
             title="Edit title"
             onclick={() => (showEditTitleDlg = true)}>🖉</button>
+        <small class="version">v.{version}</small>
     </div>
 
     <div class="mid">
@@ -163,5 +166,10 @@
         box-shadow: 0px 0px 10px 5px rgba(183, 179, 179, 0.58);
         -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.58);
         -moz-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.58);
+    }
+    .version {
+        margin: auto 1em auto auto;
+        color: var(--app-disabled-text-color);
+        font-size: 0.7em;
     }
 </style>
