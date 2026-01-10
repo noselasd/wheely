@@ -14,7 +14,7 @@
 <style lang="scss">
     .checkbox {
         appearance: none;
-        background-color: #dfe1e4;
+        background-color: var(--app-body-background);
         border-radius: 72px;
         border-style: none;
         flex-shrink: 0;
@@ -39,7 +39,7 @@
     }
 
     .checkbox ::after {
-        background-color: #fff;
+        background-color: var(--app-icon-color);
         border-radius: 50%;
         content: '';
         height: 14px;
@@ -54,16 +54,16 @@
     }
 
     .checkbox :hover {
-        background-color: #c9cbcd;
+        background-color: var(--app-content-background);
         transition-duration: 0s;
     }
 
     .checkbox :checked {
-        background-color: #6e79d6;
+        background-color: var(--app-solid-button-color);
     }
 
     .checkbox :checked::after {
-        background-color: #fff;
+        background-color: var(--app-text-color);
         left: 13px;
     }
 
@@ -72,6 +72,6 @@
     }
 
     .checkbox :checked:hover {
-        background-color: #535db3;
+        background-color: var(--app-solid-button-color-darker);
     }
 </style>
