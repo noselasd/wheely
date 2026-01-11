@@ -4,19 +4,19 @@
     interface Props {
         showModal: boolean;
         winner: Item;
-        onClose?: () => void;
+        onClose: () => void;
     }
-    let { showModal = $bindable(), winner = $bindable(), onClose = $bindable() }: Props = $props();
-    let dialog: HTMLDialogElement; // HTMLDialogElement
+    let { showModal = $bindable(), winner, onClose }: Props = $props();
+    let dialog: HTMLDialogElement | undefined = $state(undefined); // HTMLDialogElement
     $effect(() => {
-        if (showModal) {
+        if (showModal && dialog) {
             dialog.showModal();
         }
     });
 
     function closeDialog() {
-        showModal = false;
-        if (onClose) {
+        if (dialog) {
+            showModal = false;
             onClose();
         }
     }
@@ -35,7 +35,11 @@
             <center><h2>🎊 Won ! 🎊</h2> </center>
 
             <div class="buttons">
-                <button class="cool-button button" onclick={() => dialog.close()}>Close</button>
+                <button
+                    class="cool-button button"
+                    onclick={() => {
+                        if (dialog) dialog.close();
+                    }}>Close</button>
             </div>
         </div>
     </dialog>

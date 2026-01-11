@@ -43,14 +43,11 @@
             lastWinner.value.enabled = false;
             WD.disableItemById(lastWinner.value.id);
         }
+        showWinnerDlg = false;
     }
-    $effect(() => {
-        const winners = WD.data.winners;
-        console.log('Winners', ...winners);
-    });
 </script>
 
-<WinnerDialog bind:showModal={showWinnerDlg} bind:winner={lastWinner} onClose={onCloseWinnerDialog}
+<WinnerDialog bind:showModal={showWinnerDlg} winner={lastWinner} onClose={onCloseWinnerDialog}
 ></WinnerDialog>
 <TitleDialog bind:showModal={showEditTitleDlg} bind:title={WD.data.name}></TitleDialog>
 

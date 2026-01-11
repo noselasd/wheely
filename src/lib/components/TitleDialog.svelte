@@ -1,8 +1,8 @@
 <script lang="ts">
-    let { showModal = $bindable(), title = $bindable() } = $props();
-    let dialog: HTMLDialogElement; // HTMLDialogElement
+    let { showModal = $bindable<boolean>(), title = $bindable<string>() } = $props();
+    let dialog: HTMLDialogElement | undefined = $state(undefined); // HTMLDialogElement
     $effect(() => {
-        if (showModal) dialog.showModal();
+        if (showModal && dialog) dialog.showModal();
     });
 </script>
 
@@ -10,10 +10,14 @@
     <div class="wrapper">
         <main>
             <center><h1>Edit Title</h1></center>
-            <input type="text" bind:value={title} />
+            <input autocomplete="off" spellcheck="false" type="text" bind:value={title} />
         </main>
         <div class="buttons">
-            <button class="cool-button button" onclick={() => dialog.close()}>Close</button>
+            <button
+                class="cool-button button"
+                onclick={() => {
+                    if (dialog) dialog.close();
+                }}>Close</button>
         </div>
     </div>
 </dialog>

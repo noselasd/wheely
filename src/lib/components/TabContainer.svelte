@@ -8,7 +8,7 @@
     // 	// restProps : anything of type Snippet
     // 	[key: string]: Snippet;
     // };
-    let { activeIndex = $bindable(0), ...restProps } = $props();
+    let { activeIndex = 0, ...restProps } = $props();
 
     const tabs = $derived(Object.entries(restProps).map(([k, v]) => ({ name: k, snippet: v })));
     let active = $derived(tabs[activeIndex]);

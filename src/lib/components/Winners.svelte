@@ -1,5 +1,6 @@
 <script lang="ts">
     import { data, clearWinners } from '$lib/WheelData.svelte';
+    let winners = $derived(data.winners.slice());
     function onClear() {
         clearWinners();
     }
@@ -13,7 +14,7 @@
     {/if}
 </div>
 <textarea rows="10" autocomplete="off" spellcheck="false" readonly wrap={'off' as any}
-    >{data.winners.reverse().join('\n')}</textarea>
+    >{winners.reverse().join('\n')}</textarea>
 <div class="tools">
     <button
         title="Clear winning entries"
