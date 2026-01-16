@@ -1,3 +1,5 @@
+import { LocalStorage } from '$lib/LocalStorage.svelte';
+
 // Overlays the Item interface from spin-wheel package
 export interface Item {
     label: string;
@@ -9,12 +11,18 @@ export interface WheelData {
     winners: string[];
 }
 
-export const data: WheelData = $state({
+// export const data: WheelData = $state({
+//     name: '',
+//     items: [],
+//     winners: [],
+// });
+
+export const dataStorage = new LocalStorage<WheelData>('wheel-data', {
     name: '',
     items: [],
     winners: [],
 });
-
+export const data = dataStorage.value;
 export function setItems(items: Item[]) {
     data.items.splice(0, data.items.length, ...items);
 }

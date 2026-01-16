@@ -13,25 +13,29 @@
     let showEditTitleDlg = $state(false);
     let lastWinner: Item = $state({ label: '', value: { id: -1, enabled: true } });
     let clearWinners = $state(false);
-    WD.setItems([
-        {
-            label: 'One',
-            value: { id: 1, enabled: true },
-        },
-        {
-            label: 'Two',
-            value: { id: 2, enabled: true },
-        },
-        {
-            label: 'Three',
-            value: { id: 3, enabled: true },
-        },
-        {
-            label: 'Four',
-            value: { id: 4, enabled: true },
-        },
-    ]);
-    WD.data.name = 'Spin the Wheel';
+    if (!WD.data.items) {
+        WD.setItems([
+            {
+                label: 'One',
+                value: { id: 1, enabled: true },
+            },
+            {
+                label: 'Two',
+                value: { id: 2, enabled: true },
+            },
+            {
+                label: 'Three',
+                value: { id: 3, enabled: true },
+            },
+            {
+                label: 'Four',
+                value: { id: 4, enabled: true },
+            },
+        ]);
+    }
+    if (!WD.data.name) {
+        WD.data.name = 'Spin the Wheel';
+    }
     function onWin(winningItem: Item) {
         WD.addWinner(winningItem.label);
         console.log('Winning item', winningItem);
