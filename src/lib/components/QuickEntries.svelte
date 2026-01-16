@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { data, setItems, type Item } from '$lib/WheelData.svelte';
+    import { data, setItems, initialize, type Item } from '$lib/WheelData.svelte';
     import Checkbox from '$lib/components/Checkbox.svelte';
     let { clearWinners = $bindable(false) } = $props();
     let text = {
@@ -30,6 +30,9 @@
 <div class="tools">
     <Checkbox title="Remove winners from wheel (Can't win twice)" bind:checked={clearWinners} />
     Remove winners
+    {#if clearWinners}
+        <button title="Reset wheel" class="cool-button button" onclick={initialize}>Reset</button>
+    {/if}
 </div>
 
 <style lang="scss">
@@ -60,9 +63,15 @@
             outline: solid var(--app-input-border-color);
         }
     }
+    .button {
+        color: var(--app-content-text-color);
+        background-color: var(--app-widget-button-color);
+        margin-left: auto;
+    }
     .tools {
         margin: 0.3em;
         display: flex;
+        align-items: flex-end;
         gap: 0.3em;
         flex-direction: row;
     }
