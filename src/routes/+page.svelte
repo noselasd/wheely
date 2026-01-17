@@ -8,38 +8,21 @@
     import TitleDialog from '$lib/components/TitleDialog.svelte';
     import type { Item } from '$lib/WheelData.svelte';
     import { version } from '$app/environment';
+    import { onMount } from 'svelte';
 
     let showWinnerDlg = $state(false);
     let showEditTitleDlg = $state(false);
     let lastWinner: Item = $state({ label: '', value: { id: -1, enabled: true } });
-    let clearWinners = $state(false);
-    WD.setItems([
-        {
-            label: 'One',
-            value: { id: 1, enabled: true },
-        },
-        {
-            label: 'Two',
-            value: { id: 2, enabled: true },
-        },
-        {
-            label: 'Three',
-            value: { id: 3, enabled: true },
-        },
-        {
-            label: 'Four',
-            value: { id: 4, enabled: true },
-        },
-    ]);
-    WD.data.name = 'Spin the Wheel';
+
     function onWin(winningItem: Item) {
         WD.addWinner(winningItem.label);
         console.log('Winning item', winningItem);
         lastWinner = winningItem;
         showWinnerDlg = true;
     }
+
     function onCloseWinnerDialog() {
-        if (clearWinners) {
+        if (WD.data.settings.clearWinnersAfterSpin) {
             lastWinner.value.enabled = false;
             WD.disableItemById(lastWinner.value.id);
         }
@@ -72,7 +55,7 @@
             <div class="panel">
                 <TabContainer activeIndex={1}>
                     {#snippet Entries()}
-                        <QuickEntries bind:clearWinners />
+                        <QuickEntries />
                     {/snippet}
                     {#snippet Winners()}
                         <WinnersComponent />
