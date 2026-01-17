@@ -9,7 +9,7 @@
 <dialog class="shadowbox" bind:this={dialog} onclose={() => (showModal = false)}>
     <div class="wrapper">
         <main>
-            <center><h1>Edit Title</h1></center>
+            <h1>Title</h1>
             <input autocomplete="off" spellcheck="false" type="text" bind:value={title} />
         </main>
         <div class="buttons">

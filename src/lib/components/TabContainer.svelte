@@ -41,13 +41,16 @@
     button.selected {
         border-top-right-radius: 8px;
         border-top-left-radius: 8px;
-        border-top-width: 5px;
         background-color: var(--app-widget-button-color);
         border-color: var(--app-widget-button-color-darker) var(--app-body-background)
             var(--app-content-background);
     }
     button:hover {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
         background-color: var(--app-widget-button-color-darker);
+        border-color: var(--app-widget-button-color-darker) var(--app-body-background)
+            var(--app-content-background);
     }
     main {
         border: 1px solid var(--app-body-background);

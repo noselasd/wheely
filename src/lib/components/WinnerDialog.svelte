@@ -48,6 +48,7 @@
 <style lang="scss">
     h1 {
         font-size: 3em;
+        color: var(--app-highlight-text-color);
     }
     h2 {
         font-size: 1em;
