@@ -41,6 +41,7 @@ const defaultData: WheelData = {
 };
 const dataStorage = new LocalStorage<WheelData>('wheel-data', defaultData);
 export const data = dataStorage.value;
+initialize();
 
 export function setItems(items: Item[]) {
     data.items.splice(0, data.items.length, ...items);

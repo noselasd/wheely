@@ -13,7 +13,7 @@
     let showWinnerDlg = $state(false);
     let showEditTitleDlg = $state(false);
     let lastWinner: Item = $state({ label: '', value: { id: -1, enabled: true } });
-    let clearWinners = $state(false);
+    let clearWinners = $state(WD.data.settings.clearWinnersAfterSpin);
 
     function onWin(winningItem: Item) {
         WD.addWinner(winningItem.label);
@@ -21,13 +21,8 @@
         lastWinner = winningItem;
         showWinnerDlg = true;
     }
-
-    onMount(() => {
-        WD.initialize();
-        clearWinners = WD.data.settings.clearWinnersAfterSpin;
-        $effect(() => {
-            WD.setClearWinnersAfterSpin(clearWinners);
-        });
+    $effect(() => {
+        WD.setClearWinnersAfterSpin(clearWinners);
     });
 
     function onCloseWinnerDialog() {
