@@ -1,19 +1,19 @@
 <script lang="ts">
-    import { data, setItems, initialize, type Item } from '$lib/WheelData.svelte';
+    import * as WD from '$lib/WheelData.svelte';
+
     import Checkbox from '$lib/components/Checkbox.svelte';
-    let { clearWinners = $bindable(false) } = $props();
     let text = {
         get value() {
-            let s = data.items.map((e: Item) => e.label).join('\n');
+            let s = WD.data.items.map((e: WD.Item) => e.label).join('\n');
             console.log('S is ', s);
             return s;
         },
         set value(val: string) {
             let e = val.split('\n');
-            let items: Item[] = e.map((e, idx) => {
+            let items: WD.Item[] = e.map((e, idx) => {
                 return { label: e, value: { id: idx + 1, enabled: true } };
             });
-            setItems(items);
+            WD.setItems(items);
         },
     };
 </script>
@@ -28,10 +28,13 @@
     wrap={'off' as any}>
 </textarea>
 <div class="tools">
-    <Checkbox title="Remove winners from wheel (Can't win twice)" bind:checked={clearWinners} />
+    <Checkbox
+        title="Remove winners from wheel (Can't win twice)"
+        bind:checked={WD.data.settings.clearWinnersAfterSpin} />
     Remove winners
-    {#if clearWinners}
-        <button title="Reset wheel" class="cool-button button" onclick={initialize}>Reset</button>
+    {#if WD.data.settings.clearWinnersAfterSpin}
+        <button title="Reset wheel" class="cool-button button" onclick={WD.initialize}
+            >Reset</button>
     {/if}
 </div>
 

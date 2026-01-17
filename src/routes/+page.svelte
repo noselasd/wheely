@@ -13,7 +13,6 @@
     let showWinnerDlg = $state(false);
     let showEditTitleDlg = $state(false);
     let lastWinner: Item = $state({ label: '', value: { id: -1, enabled: true } });
-    let clearWinners = $state(WD.data.settings.clearWinnersAfterSpin);
 
     function onWin(winningItem: Item) {
         WD.addWinner(winningItem.label);
@@ -21,12 +20,9 @@
         lastWinner = winningItem;
         showWinnerDlg = true;
     }
-    $effect(() => {
-        WD.setClearWinnersAfterSpin(clearWinners);
-    });
 
     function onCloseWinnerDialog() {
-        if (clearWinners) {
+        if (WD.data.settings.clearWinnersAfterSpin) {
             lastWinner.value.enabled = false;
             WD.disableItemById(lastWinner.value.id);
         }
@@ -59,7 +55,7 @@
             <div class="panel">
                 <TabContainer activeIndex={1}>
                     {#snippet Entries()}
-                        <QuickEntries bind:clearWinners />
+                        <QuickEntries />
                     {/snippet}
                     {#snippet Winners()}
                         <WinnersComponent />
